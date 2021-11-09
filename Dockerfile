@@ -1,7 +1,7 @@
 FROM tensorflow/tensorflow
 
 ARG MODEL_PATH_ARG
-ENV MODEL_PATH = ${MODEL_PATH_ARG}}
+ENV MODEL_PATH = ${MODEL_PATH_ARG}
 
 WORKDIR /root
 
