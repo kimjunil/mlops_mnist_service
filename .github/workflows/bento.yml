@@ -32,4 +32,19 @@ jobs:
           password: ${{ secrets.PACKAGE_REGISTRY_ACCESS_TOKEN}}
           buildArgs: MODEL_PATH_ARG=${{ github.event.inputs.model_path }}
           addLatest: true
-        
+      - name: Setup Kustomize
+        uses: imranismail/setup-kustomize@v1
+      - name: Checkout mlops_mnist_config
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PACKAGE_REGISTRY_ACCESS_TOKEN}}
+          repository: kimjunil/mlops_mnist_config
+          path: mlops_mnist_config
+      - name: Clone config
+        run: |
+          cd mlops_mnist_config/overlays/dev
+          kustomize edit set image ghcr.io/kimjunil/mnist_classifier_bento:${{ github.event.inputs.model_tag }}
+          git config --global user.name ${{ github.repository_owner }}
+          git config --global user.email "iam@junil.kim"
+          git commit -am 'Publish new version ${{ github.event.inputs.model_tag }} to dev'
+          git push || echo 'no changes'
