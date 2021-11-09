@@ -4,6 +4,8 @@ ARG model_path
 
 WORKDIR /root
 
+RUN pip install bentoml pillow
+
 RUN mkdir /root/bento
 COPY bento_packer.py /root/bento/bento_packer.py
 COPY bento_service.py /root/bento/bento_service.py
