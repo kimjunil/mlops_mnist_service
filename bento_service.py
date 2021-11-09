@@ -1,12 +1,15 @@
 from typing import List
 
 import numpy as np
+import tensorflow as tf
 from PIL import Image
 from bentoml import api, artifacts, env, BentoService
 from bentoml.frameworks.keras import KerasModelArtifact
 from bentoml.adapters import ImageInput
 
 
+MNIST_CLASSES = [str(x) for x in range(10)]
+               
 @env(pip_packages=["tensorflow==2.7.0", "pillow", "numpy"])
 @artifacts([KerasModelArtifact("model")])
 class MnistService(BentoService):
@@ -18,6 +21,8 @@ class MnistService(BentoService):
             img = np.array(img.getdata()).reshape((28, 28, 1))
             inputs.append(img)
         inputs = np.stack(inputs)
-        results = self.artifacts.model.predict(inputs)
-        return results
+        output = self.artifacts.model.predict(inputs)
+
+        result = [(MNIST_CLASSES[i],round(output[i])) for i in range(10)]
+        return result
         
