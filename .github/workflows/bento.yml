@@ -29,7 +29,7 @@ jobs:
           directory: .
           username: ${{ github.repository_owner }}
           password: ${{ secrets.PACKAGE_REGISTRY_ACCESS_TOKEN}}
-          buildArgs: MODEL_PATH_ARG=${{ github.event.inputs.model_path }}
+          buildArgs: MODEL_PATH_ARG=${{ github.event.inputs.model_path }}, SLACK_WEBHOOK_URL_ARG=${{ secrets.SLACK_WEBHOOK_URL}}
           addLatest: true
       - name: Setup Kustomize
         uses: imranismail/setup-kustomize@v1

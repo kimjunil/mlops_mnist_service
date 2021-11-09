@@ -3,6 +3,9 @@ FROM tensorflow/tensorflow
 ARG MODEL_PATH_ARG
 ENV MODEL_PATH=${MODEL_PATH_ARG}
 
+ARG SLACK_WEBHOOK_URL_ARG
+ENV SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL_ARG}
+
 WORKDIR /root
 
 RUN pip install tensorflow imageio bentoml pillow
