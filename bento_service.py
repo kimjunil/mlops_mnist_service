@@ -22,7 +22,6 @@ class MnistService(BentoService):
             inputs.append(img)
         inputs = np.stack(inputs)
         output = self.artifacts.model.predict(inputs)
-
-        result = [(MNIST_CLASSES[i], output[i]) for i in range(10)]
-        return result
+        
+        return np.round(output, 2)
         
