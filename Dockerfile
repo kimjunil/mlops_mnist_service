@@ -5,7 +5,7 @@ ENV MODEL_PATH=${MODEL_PATH_ARG}
 
 WORKDIR /root
 
-RUN pip install bentoml pillow
+RUN pip install tensorflow imageio bentoml pillow
 
 RUN mkdir /root/bento
 COPY bento_packer.py /root/bento/bento_packer.py
