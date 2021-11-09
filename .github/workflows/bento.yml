@@ -30,6 +30,6 @@ jobs:
           directory: .
           username: ${{ github.repository_owner }}
           password: ${{ secrets.PACKAGE_REGISTRY_ACCESS_TOKEN}}
-          buildArgs: model_path=${{ github.event.inputs.model_path }}
+          buildArgs: MODEL_PATH_ARG=${{ github.event.inputs.model_path }}
           addLatest: true
         
