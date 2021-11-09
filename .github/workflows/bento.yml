@@ -3,8 +3,7 @@
 name: CI
 
 on: 
-  repository_dispatch:
-    types: [deploy]
+  workflow_dispatch:
     inputs:
       model_path:
         description: 'model path (gs://xxxx.h5)'     
