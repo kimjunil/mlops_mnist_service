@@ -23,6 +23,6 @@ class MnistService(BentoService):
         inputs = np.stack(inputs)
         output = self.artifacts.model.predict(inputs)
 
-        result = [(MNIST_CLASSES[i],round(output[i])) for i in range(10)]
+        result = [(MNIST_CLASSES[i], output[i]) for i in range(10)]
         return result
         
