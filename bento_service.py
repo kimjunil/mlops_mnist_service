@@ -7,7 +7,6 @@ from bentoml import api, artifacts, env, BentoService
 from bentoml.frameworks.keras import KerasModelArtifact
 from bentoml.adapters import ImageInput
 
-
 MNIST_CLASSES = [str(x) for x in range(10)]
                
 @env(pip_packages=["tensorflow==2.7.0", "pillow", "numpy"])
@@ -23,5 +22,4 @@ class MnistService(BentoService):
         inputs = np.stack(inputs)
         output = self.artifacts.model.predict(inputs)
         
-        return np.round(output, 2)
-        
+        return np.round(output, 10)
